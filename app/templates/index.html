@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AutoU – Classificador de E‑mail</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <main class="max-w-4xl mx-auto p-6" x-data="emailApp()">
+    <header class="mb-6">
+      <h1 class="text-2xl font-bold">AutoU – Classificador & Respostas</h1>
+      <p class="text-sm text-slate-600">Envie um .txt/.pdf ou cole o texto. O sistema identifica <b>Produtivo</b> vs <b>Improdutivo</b> e sugere uma resposta.</p>
+    </header>
+
+    <section class="grid gap-4 md:grid-cols-2">
+      <div class="bg-white rounded-xl shadow p-4">
+        <h2 class="font-semibold mb-2">Entrada</h2>
+        <div class="space-y-3">
+          <textarea x-model="rawText" class="w-full h-40 border rounded-lg p-3 focus:outline-none" placeholder="Cole o texto do e‑mail aqui..."></textarea>
+          <div class="flex items-center gap-2">
+            <input type="file" x-ref="file" class="hidden" @change="onFileChange" accept=".txt,.pdf" />
+            <button class="btn" @click="$refs.file.click()">Selecionar arquivo (.txt/.pdf)</button>
+            <button class="btn-secondary" @click="clearAll">Limpar</button>
+          </div>
+          <button class="btn-primary w-full" @click="submit" :disabled="loading">
+            <span x-show="!loading">Classificar & Sugerir Resposta</span>
+            <span x-show="loading">Processando...</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-xl shadow p-4">
+        <h2 class="font-semibold mb-2">Resultado</h2>
+        <template x-if="result">
+          <div class="space-y-3">
+            <div class="flex items-center gap-2">
+              <span class="badge" :class="result.category==='Produtivo' ? 'bg-emerald-100 text-emerald-700' : 'bg-slate-200 text-slate-700'" x-text="result.category"></span>
+              <span class="text-xs text-slate-500">confiança: <span x-text="(result.category_score*100).toFixed(1)+'%'"></span></span>
+            </div>
+            <div class="text-sm text-slate-700">Intenção: <b x-text="result.intent"></b> (<span x-text="(result.intent_score*100).toFixed(1)+'%'"></span>)</div>
+            <div>
+              <label class="text-sm text-slate-600">Resposta sugerida</label>
+              <textarea class="w-full h-48 border rounded-lg p-3" x-model="result.suggested_reply"></textarea>
+              <div class="flex gap-2 mt-2">
+                <button class="btn" @click="copyReply">Copiar</button>
+                <span class="text-xs text-slate-500" x-text="'Fonte: ' + (result.reply_source||'-')"></span>
+              </div>
+            </div>
+          </div>
+        </template>
+        <template x-if="!result">
+          <p class="text-sm text-slate-500">Nenhum resultado ainda. Faça o upload ou cole um texto e clique em <b>Classificar</b>.</p>
+        </template>
+      </div>
+    </section>
+
+    <footer class="mt-6 text-xs text-slate-500">
+      <p>🛈 Dica: sem <code>OPENAI_API_KEY</code>, o sistema usa templates. Com a chave, ele refina a resposta automaticamente.</p>
+    </footer>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

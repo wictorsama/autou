@@ -1,0 +1,13 @@
+torch
+numpy
+fastapi
+uvicorn
+jinja2
+huggingface-hub
+transformers[sentencepiece]
+openai
+python-multipart
+pytest
+protobuf
+sentencepiece
+pdfminer.six
