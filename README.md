@@ -357,6 +357,19 @@ Para informações técnicas detalhadas, consulte a [documentação completa](./
 - Integração opcional com OpenAI (configurável)
 - Logs mínimos para debugging
 
+## 🚀 Otimizações de Memória
+
+**Implementadas para resolver problemas de limite de memória no Render:**
+
+- ✅ **Configurações centralizadas** com monitoramento de memória
+- ✅ **Limpeza automática de memória** com garbage collection
+- ✅ **Limites otimizados**: arquivos (5MB), texto (10k chars)
+- ✅ **Modelo NLP otimizado** com fallback automático
+- ✅ **Dependências otimizadas** com versões específicas
+- ✅ **Monitoramento em tempo real** via endpoint `/health`
+
+📋 **Documentação completa**: [MEMORY_OPTIMIZATION.md](./MEMORY_OPTIMIZATION.md)
+
 ## 🚧 Roadmap
 
 - [ ] Extração de IDs de tickets

@@ -242,6 +242,15 @@ O sistema possui templates específicos para cada tipo de intenção:
 4. **Regras Fixas**: Sistema de refinamento baseado em regras hard-coded
 5. **Armazenamento Local**: Histórico limitado ao navegador
 
+### Melhorias Implementadas ✅
+1. **Otimizações de Memória**: Sistema completo de gerenciamento de memória
+   - Configurações centralizadas (`app/config.py`)
+   - Limpeza automática com garbage collection
+   - Monitoramento em tempo real via `psutil`
+   - Limites otimizados para arquivos e texto
+   - Modelo NLP com fallback automático
+   - Dependências otimizadas com versões específicas
+
 ### Melhorias Propostas
 1. **Sistema de Feedback**: Coleta de avaliações do usuário
 2. **Aprendizado Contínuo**: Retreinamento periódico com novos dados
