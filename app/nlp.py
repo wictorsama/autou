@@ -87,6 +87,24 @@ def classify_email(text: str) -> Dict:
         if "agradecimento" in top_intent.lower() or "felicitação" in top_intent.lower():
             category = "Improdutivo"
         
+        # Detecção adicional de agradecimentos baseada no conteúdo do texto
+        gratitude_keywords = ["obrigado", "obrigada", "agradeço", "agradecemos", "grato", "grata", 
+                             "muito obrigado", "muito obrigada", "excelente", "perfeito", "perfeitamente",
+                             "parabéns", "felicitações", "sucesso", "ótimo trabalho", "bom trabalho"]
+        
+        # Palavras que indicam conclusão/resolução (não solicitação)
+        resolution_keywords = ["resolvido", "solucionado", "concluído", "finalizado", "problema foi", 
+                              "tudo certo", "está ok", "funcionando"]
+        
+        text_lower = text.lower()
+        gratitude_count = sum(1 for keyword in gratitude_keywords if keyword in text_lower)
+        resolution_count = sum(1 for keyword in resolution_keywords if keyword in text_lower)
+        
+        # Se contém múltiplas palavras de agradecimento OU agradecimento + resolução
+        if gratitude_count >= 2 or (gratitude_count >= 1 and resolution_count >= 1):
+            category = "Improdutivo"
+            top_intent = "Agradecimento ou felicitação"
+        
         # Override: Se o texto contém palavras típicas de spam/marketing, forçar como improdutivo
         spam_keywords = ["oferta", "desconto", "promoção", "clique aqui", "não perca", "limitada", 
                          "imperdível", "apenas hoje", "corra", "vagas limitadas", "grátis", 
