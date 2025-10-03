@@ -1,5 +1,6 @@
 import os
-from fastapi import FastAPI, UploadFile, Form, File, Request
+import gc
+from fastapi import FastAPI, UploadFile, Form, File, Request, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -9,9 +10,24 @@ from pydantic import BaseModel
 from app.utils import read_text_from_file
 from app.nlp import classify_email
 from app.responders import suggest_reply
+from app.config import Config
 
-PORT = int(os.getenv("PORT", 8000))
-MAX_CHARS = int(os.getenv("MAX_TEXT_CHARS", 20000))
+# Contador para limpeza de memória
+_operation_count = 0
+
+def cleanup_memory():
+    """Força limpeza de memória quando necessário"""
+    global _operation_count
+    _operation_count += 1
+    
+    if Config.ENABLE_MEMORY_CLEANUP and _operation_count >= Config.GC_THRESHOLD:
+        gc.collect()
+        _operation_count = 0
+        print(f"Limpeza de memória executada. Memória atual: {Config.get_memory_info()}")
+
+PORT = Config.PORT
+MAX_CHARS = Config.MAX_CHARS
+MAX_FILE_SIZE = Config.MAX_FILE_SIZE
 
 app = FastAPI(title="AutoU Email Classifier", description="Sistema de classificação e resposta automática de e-mails")
 
@@ -50,7 +66,13 @@ def index(request: Request):
 @app.get("/health")
 def health():
     """Endpoint de health check."""
-    return {"status": "ok", "service": "AutoU Email Classifier"}
+    cleanup_memory()
+    memory_info = Config.get_memory_info()
+    return {
+        "status": "ok", 
+        "service": "AutoU Email Classifier",
+        "memory": memory_info
+    }
 
 
 @app.post("/api/process", response_model=ProcessResponse)
@@ -69,25 +91,43 @@ async def process_email(
     """
     raw = ""
     filename = None
+    content = None
     
-    # Processar arquivo ou texto
-    if file is not None:
-        filename = file.filename
-        content = await file.read()
-        try:
-            raw, _ = read_text_from_file(filename, content)
-        except ValueError as e:
+    try:
+        # Processar arquivo ou texto
+        if file is not None:
+            # Verificar tamanho do arquivo
+            if file.size and file.size > MAX_FILE_SIZE:
+                raise HTTPException(
+                    status_code=413,
+                    detail=f"Arquivo muito grande. Máximo permitido: {MAX_FILE_SIZE // (1024*1024)}MB"
+                )
+            
+            filename = file.filename
+            content = await file.read()
+            
+            try:
+                raw, _ = read_text_from_file(filename, content)
+            except ValueError as e:
+                return JSONResponse(
+                    {"detail": str(e)}, 
+                    status_code=400
+                )
+            finally:
+                # Limpar conteúdo do arquivo da memória
+                content = None
+                gc.collect()
+                
+        elif text:
+            # Verificar tamanho do texto
+            if len(text) > MAX_CHARS:
+                text = text[:MAX_CHARS]
+            raw = text
+        else:
             return JSONResponse(
-                {"detail": str(e)}, 
+                {"detail": "Envie um arquivo .txt/.pdf ou cole o texto."}, 
                 status_code=400
             )
-    elif text:
-        raw = text
-    else:
-        return JSONResponse(
-            {"detail": "Envie um arquivo .txt/.pdf ou cole o texto."}, 
-            status_code=400
-        )
 
     # Validar conteúdo
     if not raw.strip():
@@ -128,14 +168,28 @@ async def process_email(
             status_code=500
         )
 
-    return ProcessResponse(
-        category=clf["category"],
-        category_score=clf["category_score"],
-        intent=clf["intent"],
-        intent_score=clf["intent_score"],
-        suggested_reply=reply["reply"],
-        reply_source=reply["source"],
-    )
+        return ProcessResponse(
+            category=clf["category"],
+            category_score=clf["category_score"],
+            intent=clf["intent"],
+            intent_score=clf["intent_score"],
+            suggested_reply=reply["reply"],
+            reply_source=reply["source"],
+        )
+    
+    except Exception as e:
+        # Log do erro e limpeza de memória
+        gc.collect()
+        return JSONResponse(
+            {"detail": f"Erro interno do servidor: {str(e)}"}, 
+            status_code=500
+        )
+    
+    finally:
+        # Limpeza final de memória
+        cleanup_memory()
+        raw = None
+        content = None
 
 
 if __name__ == "__main__":

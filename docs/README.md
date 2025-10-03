@@ -23,6 +23,15 @@ Esta pasta contém toda a documentação técnica detalhada do projeto AutoU Ema
   - Funcionalidades avançadas (PWA, Dark Mode)
   - Roadmap de melhorias
 
+### 🚀 Otimizações e Performance
+- **[MEMORY_OPTIMIZATION.md](../MEMORY_OPTIMIZATION.md)** - Otimizações de memória implementadas
+  - Configurações centralizadas
+  - Limpeza automática de memória
+  - Monitoramento em tempo real
+  - Modelo NLP otimizado
+  - Dependências otimizadas
+  - Guia de troubleshooting
+
 ### 📝 Documentação Histórica
 - **[MVP_INICIAL.md](./MVP_INICIAL.md)** - Documentação inicial do MVP
   - Estrutura original do projeto
@@ -61,6 +70,7 @@ Esta pasta contém toda a documentação técnica detalhada do projeto AutoU Ema
 |-----------|--------|-------------------|--------|
 | ARQUITETURA.md | ~277 | Janeiro 2025 | ✅ Atualizado |
 | DESIGN_ARCHITECTURE.md | ~418 | Janeiro 2025 | ✅ Atualizado |
+| MEMORY_OPTIMIZATION.md | ~111 | Janeiro 2025 | ✅ Novo |
 | MVP_INICIAL.md | ~710 | Arquivo histórico | 📚 Referência |
 
 ---
