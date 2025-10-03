@@ -8,5 +8,11 @@ services:
     envVars:
       - key: OPENAI_API_KEY
         sync: false
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
       - key: ZSL_MODEL
         value: joeddav/xlm-roberta-large-xnli
+      - key: HOST
+        value: 0.0.0.0
+      - key: MAX_TEXT_CHARS
+        value: 20000

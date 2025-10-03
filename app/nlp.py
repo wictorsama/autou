@@ -66,11 +66,17 @@ def classify_email(text: str) -> Dict:
     # Override: Se o texto contém palavras típicas de spam/marketing, forçar como improdutivo
     spam_keywords = ["oferta", "desconto", "promoção", "clique aqui", "não perca", "limitada", 
                      "imperdível", "apenas hoje", "corra", "vagas limitadas", "grátis", 
-                     "ganhe", "prêmio", "sorteio", "urgente"]
+                     "ganhe", "prêmio", "sorteio", "urgente", "levando", "só hoje", "so hoje",
+                     "computadores por", "aproveite", "última chance", "oferta especial",
+                     "liquidação", "mega promoção", "super oferta", "imperdível"]
     text_lower = text.lower()
     spam_count = sum(1 for keyword in spam_keywords if keyword in text_lower)
     
-    if spam_count >= 3:  # Se contém 3 ou mais palavras de spam
+    # Detecção mais rigorosa: se contém 2 ou mais palavras de spam OU padrões específicos
+    promotional_patterns = ["por 1", "x 1", "computadores por", "levando so", "levando só"]
+    has_promotional_pattern = any(pattern in text_lower for pattern in promotional_patterns)
+    
+    if spam_count >= 2 or has_promotional_pattern:  # Threshold reduzido para 2 palavras
         category = "Improdutivo"
         top_intent = "Spam ou marketing"
 

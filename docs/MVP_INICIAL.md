@@ -25,7 +25,10 @@ autou-email-ai/
 │  └─ improdutivo_felicitacao.txt
 ├─ tests/
 │  └─ test_api.py
-├─ .env.example
+├─ deploy/
+│  ├─ .env.example
+│  ├─ deploy.sh
+│  └─ README.md
 ├─ requirements.txt
 ├─ Dockerfile
 ├─ render.yaml
@@ -52,7 +55,7 @@ autou-email-ai/
 
 ---
 
-## 🔐 Variáveis de Ambiente (.env.example)
+## 🔐 Variáveis de Ambiente (deploy/.env.example)
 ```
 # Opcional – refino de respostas por LLM
 OPENAI_API_KEY=
@@ -556,7 +559,7 @@ MVP full‑stack para **classificar e-mails** (Produtivo/Improdutivo), identific
 python -m venv .venv && source .venv/bin/activate  # (Windows: .venv\\Scripts\\activate)
 pip install -r requirements.txt
 # (opcional) python -m spacy download pt_core_news_sm
-cp .env.example .env
+cp deploy/.env.example .env
 uvicorn app.main:app --reload --port 8000
 ```
 Acesse: http://localhost:8000

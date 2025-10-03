@@ -60,9 +60,9 @@ cd autou
 pip install -r requirements.txt
 ```
 
-3. **Configure variáveis de ambiente** (opcional):
+3.2. **Configure variáveis de ambiente** (opcional):
 ```bash
-cp .env.example .env
+cp deploy/.env.example .env
 # Edite o arquivo .env com suas configurações
 ```
 
@@ -163,23 +163,144 @@ Processa e classifica e-mail
 }
 ```
 
-## 🐳 Deploy com Docker
+## 🚀 Deploy em Produção
 
-### Build da imagem:
+### 🐳 Deploy com Docker
+
+#### Build da imagem:
 ```bash
 docker build -t autou .
 ```
 
-### Executar container:
+#### Executar container:
 ```bash
-docker run -p 8000:8000 autou
+docker run -p 8000:8000 -e OPENAI_API_KEY=your_key_here autou
 ```
 
-## ☁️ Deploy no Render.com
+#### Docker Compose (recomendado):
+```yaml
+version: '3.8'
+services:
+  autou:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_MODEL=gpt-4o-mini
+      - ZSL_MODEL=joeddav/xlm-roberta-large-xnli
+      - MAX_TEXT_CHARS=20000
+```
 
-1. Conecte seu repositório ao Render.com
-2. Use o arquivo `render.yaml` para configuração automática
-3. Configure as variáveis de ambiente necessárias
+### ☁️ Deploy no Render.com (Recomendado)
+
+#### Configuração Automática:
+1. **Fork/Clone** este repositório
+2. **Conecte** seu repositório ao [Render.com](https://render.com)
+3. **Importe** o projeto - o arquivo `render.yaml` será detectado automaticamente
+4. **Configure** as variáveis de ambiente:
+   - `OPENAI_API_KEY`: Sua chave da OpenAI (opcional, mas recomendado)
+   - Outras variáveis já estão pré-configuradas no `render.yaml`
+5. **Deploy** será iniciado automaticamente
+
+#### Script Automatizado:
+```bash
+# Use o script de deploy para Render
+./deploy/deploy.sh render
+```
+
+#### Configuração Manual:
+1. Crie um novo **Web Service** no Render
+2. Conecte seu repositório GitHub
+3. Configure:
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+   - **Environment**: Python 3
+4. Adicione as variáveis de ambiente necessárias
+
+### 🚂 Deploy no Railway
+
+#### Script Automatizado:
+```bash
+# Use o script de deploy para Railway
+./deploy/deploy.sh railway
+```
+
+#### Configuração Manual:
+1. Conecte seu repositório ao [Railway](https://railway.app)
+2. Configure as variáveis de ambiente:
+   ```
+   OPENAI_API_KEY=your_key_here
+   OPENAI_MODEL=gpt-4o-mini
+   ZSL_MODEL=joeddav/xlm-roberta-large-xnli
+   MAX_TEXT_CHARS=20000
+   ```
+3. O deploy será automático usando o `Dockerfile`
+
+### 🟣 Deploy no Heroku
+
+#### Script Automatizado:
+```bash
+# Use o script de deploy para Heroku
+./deploy/deploy.sh heroku
+```
+
+#### Configuração Manual:
+1. Instale o [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+2. Execute os comandos:
+   ```bash
+   heroku create your-app-name
+   heroku config:set OPENAI_API_KEY=your_key_here
+   heroku config:set OPENAI_MODEL=gpt-4o-mini
+   git push heroku main
+   ```
+
+### ☁️ Deploy na AWS (EC2 + Docker)
+
+1. **Lance uma instância EC2** (t2.micro para teste)
+2. **Instale Docker**:
+   ```bash
+   sudo yum update -y
+   sudo yum install -y docker
+   sudo service docker start
+   ```
+3. **Clone e execute**:
+   ```bash
+   git clone your-repo-url
+   cd autou
+   sudo docker build -t autou .
+   sudo docker run -d -p 80:8000 -e OPENAI_API_KEY=your_key autou
+   ```
+
+### 🔧 Variáveis de Ambiente para Produção
+
+| Variável | Obrigatória | Padrão | Descrição |
+|----------|-------------|--------|-----------|
+| `OPENAI_API_KEY` | Não | - | Chave da API OpenAI para respostas inteligentes |
+| `OPENAI_MODEL` | Não | `gpt-4o-mini` | Modelo OpenAI a utilizar |
+| `ZSL_MODEL` | Não | `joeddav/xlm-roberta-large-xnli` | Modelo de classificação |
+| `HOST` | Não | `0.0.0.0` | Host do servidor |
+| `PORT` | Não | `8000` | Porta do servidor |
+| `MAX_TEXT_CHARS` | Não | `20000` | Limite de caracteres por texto |
+
+### 🔍 Verificação do Deploy
+
+Após o deploy, teste os endpoints:
+
+```bash
+# Health check
+curl https://your-app-url.com/health
+
+# Teste de classificação
+curl -X POST https://your-app-url.com/api/process \
+  -F "text=Preciso de ajuda com o sistema"
+```
+
+### 📊 Monitoramento
+
+- **Logs**: Acesse via dashboard da plataforma escolhida
+- **Métricas**: CPU, memória e tempo de resposta
+- **Health Check**: Endpoint `/health` para monitoramento automático
 
 ## 🔧 Configuração
 
@@ -196,41 +317,38 @@ docker run -p 8000:8000 autou
 
 ```
 autou/
-├── app/
-│   ├── __init__.py
+├── app/                     # Aplicação principal
 │   ├── main.py              # FastAPI app e endpoints
 │   ├── nlp.py               # Classificação zero-shot com XLM-RoBERTa
 │   ├── responders.py        # Templates de resposta inteligentes
 │   ├── utils.py             # Utilitários para arquivos PDF/TXT
-│   ├── models/
-│   │   └── __init__.py
-│   ├── static/
-│   │   ├── app.js           # JavaScript com Alpine.js e PWA
-│   │   ├── styles.css       # CSS com dark mode e animações
-│   │   ├── icon.svg         # Ícone do PWA
-│   │   ├── manifest.json    # Manifest do PWA
-│   │   └── sw.js            # Service Worker
-│   └── templates/
-│       └── index.html       # Interface web moderna
+│   ├── static/              # Arquivos estáticos (CSS, JS, PWA)
+│   └── templates/           # Interface web moderna
+├── deploy/                  # 🚀 Scripts e configurações de deploy
+│   ├── README.md            # Instruções de deploy e configuração
+│   ├── deploy.sh            # Script automatizado de deploy
+│   └── .env.example         # Template de variáveis de ambiente
+├── docs/                    # 📚 Documentação técnica detalhada
+│   ├── README.md            # Índice da documentação
+│   ├── ARQUITETURA.md       # Documentação técnica completa
+│   ├── DESIGN_ARCHITECTURE.md # Arquitetura de design e UX
+│   └── MVP_INICIAL.md       # Documentação histórica do MVP
 ├── sample_emails/           # E-mails de exemplo para teste
-│   ├── produtivo_anexo.txt
-│   ├── produtivo_status.txt
-│   ├── improdutivo_felicitacao.txt
-│   └── improdutivo_spam.txt
 ├── tests/                   # Testes automatizados completos
-│   ├── test_api.py
-│   ├── test_nlp.py
-│   ├── test_responders.py
-│   └── test_utils.py
-├── requirements.txt         # Dependências Python atualizadas
-├── ARQUITETURA.md          # Documentação técnica detalhada
-├── DESIGN_ARCHITECTURE.md  # Arquitetura de design e UX
+├── tests_temp/              # Arquivos de teste temporários
+├── requirements.txt         # Dependências Python
 ├── Dockerfile              # Configuração Docker
-├── Procfile                # Configuração Heroku
 ├── render.yaml             # Configuração Render.com
-├── pytest.ini              # Configuração pytest
 └── README.md               # Este arquivo
 ```
+
+## 📚 Documentação Técnica
+
+Para informações técnicas detalhadas, consulte a [documentação completa](./docs/):
+
+- **[Arquitetura do Sistema](./docs/ARQUITETURA.md)** - Documentação técnica completa
+- **[Design e UX](./docs/DESIGN_ARCHITECTURE.md)** - Arquitetura visual e fluxos
+- **[Índice da Documentação](./docs/README.md)** - Guia completo da documentação
 
 ## 🔒 Privacidade e LGPD
 

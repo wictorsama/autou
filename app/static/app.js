@@ -147,6 +147,18 @@ function emailApp(){
         
         this.showNotification('Email classificado com sucesso!', 'success');
         
+        // Limpar campos após processamento bem-sucedido
+        setTimeout(() => {
+          this.rawText = "";
+          this.file = null;
+          // Limpar também o input de arquivo
+          const fileInput = document.querySelector('input[type="file"]');
+          if (fileInput) {
+            fileInput.value = '';
+          }
+          console.log('Campos limpos automaticamente');
+        }, 500);
+        
       }catch(err){
         this.showNotification(err.message, 'error');
       }finally{

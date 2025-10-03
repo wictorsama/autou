@@ -310,7 +310,11 @@
 │    │   ├── Procfile          ← Process Definition          │
 │    │   ├── requirements.txt   ← Python Dependencies        │
 │    │   ├── manifest.json     ← PWA Configuration          │
-│    │   └── sw.js             ← Service Worker              │
+│    │   ├── sw.js             ← Service Worker              │
+│    │   └── deploy/            ← Deploy Scripts & Config    │
+│    │       ├── deploy.sh     ← Automated Deploy Script    │
+│    │       ├── .env.example  ← Environment Template       │
+│    │       └── README.md     ← Deploy Instructions        │
 │    │                                                       │
 │    └── 🔧 Environment:                                      │
 │        ├── Auto-scaling                                    │
