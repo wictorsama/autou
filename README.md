@@ -6,20 +6,40 @@ O AutoU é um sistema inteligente de classificação e resposta automática de e
 
 ## 🚀 Funcionalidades
 
+### 🤖 **Inteligência Artificial**
 - **Classificação Zero-Shot**: Utiliza o modelo `joeddav/xlm-roberta-large-xnli` para classificar e-mails sem necessidade de treinamento específico
-- **Detecção de Intenção**: Identifica o tipo de solicitação (status, documento, etc.)
+- **Detecção de Intenção**: Identifica 6 tipos de intenção (status, documentos, suporte, agradecimento, social, spam)
 - **Sugestão de Respostas**: Gera respostas baseadas em templates ou integração com OpenAI
-- **Interface Web**: Interface moderna com Tailwind CSS e Alpine.js
+- **Scores de Confiança**: Exibe níveis de confiança para classificação e intenção (Alta/Média/Baixa)
+
+### 🎨 **Interface Moderna**
+- **Dark Mode**: Toggle entre modo claro e escuro com persistência
+- **Animações Nativas**: Transições suaves em CSS/JS para melhor UX
+- **Gráficos de Confiança**: Barras de progresso visuais com gradientes coloridos
+- **Auto-refresh**: Classificação automática após 2 segundos de digitação
+- **Feedback Visual**: Estados de loading, notificações e indicadores visuais
+
+### 📱 **PWA (Progressive Web App)**
+- **Instalável**: Pode ser instalado como app nativo no dispositivo
+- **Service Worker**: Funciona offline e cache inteligente
+- **Manifest**: Ícone personalizado e configurações de app
+- **Responsivo**: Interface adaptável para desktop e mobile
+
+### 💾 **Persistência Local**
+- **Histórico LocalStorage**: Salva classificações localmente no navegador
+- **Indicadores Auto-gerados**: Marca entradas criadas via auto-refresh
 - **Processamento de Arquivos**: Suporte para arquivos .txt e .pdf
 - **API RESTful**: Endpoints para integração com outros sistemas
 
 ## 🛠️ Tecnologias
 
-- **Backend**: FastAPI, Python 3.11+
-- **IA/ML**: Transformers (Hugging Face), NLTK, spaCy
-- **Frontend**: HTML5, Tailwind CSS, Alpine.js
-- **Testes**: pytest
+- **Backend**: FastAPI, Python 3.11+, Uvicorn
+- **IA/ML**: Transformers (Hugging Face), XLM-RoBERTa, NLTK
+- **Frontend**: HTML5, Tailwind CSS, Alpine.js, CSS Animations
+- **PWA**: Service Worker, Web App Manifest, LocalStorage
+- **Testes**: pytest, TestClient
 - **Deploy**: Docker, Render.com, Heroku
+- **Arquivos**: PDFMiner, Multipart Forms
 
 ## 📦 Instalação
 
@@ -54,6 +74,32 @@ uvicorn app.main:app --reload
 5. **Acesse a aplicação**:
    - Interface Web: http://localhost:8000
    - Documentação da API: http://localhost:8000/docs
+
+## 📧 Exemplos de Uso
+
+### ✅ **Emails Produtivos** (Requerem Resposta)
+```
+"Preciso do status do chamado #12345. Quando será resolvido?"
+→ Categoria: Produtivo | Intenção: Solicitação de informações
+
+"Segue em anexo o comprovante solicitado para o processo 8821."
+→ Categoria: Produtivo | Intenção: Fornecimento de informações
+```
+
+### ❌ **Emails Improdutivos** (Não Requerem Resposta)
+```
+"Feliz Natal a toda a equipe! Obrigado pelo suporte."
+→ Categoria: Improdutivo | Intenção: Agradecimento/Felicitação
+
+"OFERTA IMPERDÍVEL! 70% DE DESCONTO! Clique aqui!"
+→ Categoria: Improdutivo | Intenção: Spam/Marketing
+```
+
+### 🎯 **Testando a Aplicação**
+1. Cole um dos exemplos na caixa de texto
+2. Clique "Classificar Email" ou aguarde o auto-refresh (2s)
+3. Observe os gráficos de confiança e resposta sugerida
+4. Teste o dark mode (🌙) e instale como PWA (📱)
 
 ## 🧪 Testes
 
@@ -153,19 +199,32 @@ autou/
 ├── app/
 │   ├── __init__.py
 │   ├── main.py              # FastAPI app e endpoints
-│   ├── nlp.py               # Classificação zero-shot
-│   ├── responders.py        # Templates de resposta
-│   ├── utils.py             # Utilitários para arquivos
+│   ├── nlp.py               # Classificação zero-shot com XLM-RoBERTa
+│   ├── responders.py        # Templates de resposta inteligentes
+│   ├── utils.py             # Utilitários para arquivos PDF/TXT
 │   ├── models/
 │   │   └── __init__.py
 │   ├── static/
-│   │   ├── app.js           # JavaScript frontend
-│   │   └── styles.css       # Estilos CSS
+│   │   ├── app.js           # JavaScript com Alpine.js e PWA
+│   │   ├── styles.css       # CSS com dark mode e animações
+│   │   ├── icon.svg         # Ícone do PWA
+│   │   ├── manifest.json    # Manifest do PWA
+│   │   └── sw.js            # Service Worker
 │   └── templates/
-│       └── index.html       # Interface web
-├── sample_emails/           # E-mails de exemplo
-├── tests/                   # Testes automatizados
-├── requirements.txt         # Dependências Python
+│       └── index.html       # Interface web moderna
+├── sample_emails/           # E-mails de exemplo para teste
+│   ├── produtivo_anexo.txt
+│   ├── produtivo_status.txt
+│   ├── improdutivo_felicitacao.txt
+│   └── improdutivo_spam.txt
+├── tests/                   # Testes automatizados completos
+│   ├── test_api.py
+│   ├── test_nlp.py
+│   ├── test_responders.py
+│   └── test_utils.py
+├── requirements.txt         # Dependências Python atualizadas
+├── ARQUITETURA.md          # Documentação técnica detalhada
+├── DESIGN_ARCHITECTURE.md  # Arquitetura de design e UX
 ├── Dockerfile              # Configuração Docker
 ├── Procfile                # Configuração Heroku
 ├── render.yaml             # Configuração Render.com

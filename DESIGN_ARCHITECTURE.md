@@ -14,18 +14,20 @@
 ```
 ┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐
 │                  │    │                  │    │                  │
-│   Frontend Web   │◄──►│   Backend API    │◄──►│   NLP Engine     │
-│   (HTML/CSS/JS)  │    │   (FastAPI)      │    │ (Transformers)   │
+│   Frontend PWA   │◄──►│   Backend API    │◄──►│   NLP Engine     │
+│ (Alpine.js/CSS)  │    │   (FastAPI)      │    │ (Transformers)   │
 │                  │    │                  │    │                  │
 └──────────────────┘    └──────────────────┘    └──────────────────┘
          │                        │                        │
          │                        │                        │
          ▼                        ▼                        ▼
 ┌──────────────────┐    ┌──────────────────┐    ┌──────────────────┐
-│   User Interface │    │  Response System │    │  Classification  │
-│   - Upload Form  │    │  - Templates     │    │  - Sentiment     │
-│   - Results View │    │  - Auto-replies  │    │  - Intent Det.   │
-│   - Feedback UI  │    │  - Refinement    │    │  - Spam Filter   │
+│   Modern UI      │    │  Response System │    │  Classification  │
+│   - Dark Mode    │    │  - Templates     │    │  - Zero-shot     │
+│   - PWA Features │    │  - Auto-replies  │    │  - Intent Det.   │
+│   - Local Storage│    │  - Refinement    │    │  - Spam Filter   │
+│   - Confidence   │    │  - Personalized  │    │  - Confidence    │
+│     Graphs       │    │    Responses     │    │    Scoring       │
 └──────────────────┘    └──────────────────┘    └──────────────────┘
 ```
 
@@ -118,17 +120,24 @@
 │                      Frontend Web                          │
 ├─────────────────────────────────────────────────────────────┤
 │  📁 templates/                                              │
-│    └── index.html          ← Interface principal           │
+│    └── index.html          ← Interface principal (Alpine.js)│
 │  📁 static/                                                 │
-│    ├── styles.css          ← Estilos CSS                   │
-│    └── app.js              ← Lógica JavaScript             │
+│    ├── styles.css          ← Estilos CSS + Dark Mode       │
+│    ├── app.js              ← Lógica JavaScript + Alpine.js │
+│    ├── manifest.json       ← PWA Manifest                  │
+│    └── sw.js               ← Service Worker                 │
 ├─────────────────────────────────────────────────────────────┤
 │  Funcionalidades:                                          │
 │  ✓ Upload de arquivos (.txt, .pdf)                         │
 │  ✓ Input direto de texto                                   │
-│  ✓ Exibição de resultados                                  │
-│  ✓ Interface responsiva                                     │
-│  ✓ Feedback visual                                          │
+│  ✓ Exibição de resultados com gráficos                     │
+│  ✓ Interface responsiva (Tailwind CSS)                     │
+│  ✓ Dark Mode com persistência                              │
+│  ✓ PWA (Progressive Web App)                               │
+│  ✓ Auto-refresh automático                                 │
+│  ✓ Histórico local (localStorage)                          │
+│  ✓ Gráficos de confiança animados                          │
+│  ✓ Feedback visual e animações                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -292,19 +301,23 @@
 │    │   ├── Python 3.11 Runtime                             │
 │    │   ├── FastAPI Application                              │
 │    │   ├── Hugging Face Transformers                       │
-│    │   └── Static Files Serving                            │
+│    │   ├── Static Files Serving (PWA)                      │
+│    │   └── Service Worker Support                          │
 │    │                                                       │
 │    ├── 📋 Configuration Files:                             │
 │    │   ├── render.yaml        ← Render Config              │
 │    │   ├── Dockerfile         ← Container Setup            │
 │    │   ├── Procfile          ← Process Definition          │
-│    │   └── requirements.txt   ← Dependencies               │
+│    │   ├── requirements.txt   ← Python Dependencies        │
+│    │   ├── manifest.json     ← PWA Configuration          │
+│    │   └── sw.js             ← Service Worker              │
 │    │                                                       │
 │    └── 🔧 Environment:                                      │
 │        ├── Auto-scaling                                    │
-│        ├── HTTPS/SSL                                       │
+│        ├── HTTPS/SSL (Required for PWA)                   │
 │        ├── CDN Integration                                 │
-│        └── Health Monitoring                               │
+│        ├── Health Monitoring                               │
+│        └── PWA Manifest Serving                            │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -331,6 +344,44 @@
 └─────────────────────────────────────────────────────────────┘
 ```
 
+## 🎨 Funcionalidades Implementadas
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 Funcionalidades Atuais                     │
+├─────────────────────────────────────────────────────────────┤
+│  🌙 Dark Mode:                                             │
+│    ├── Toggle com persistência localStorage                │
+│    ├── Transições suaves CSS                               │
+│    ├── Cobertura completa da interface                     │
+│    └── Integração com Alpine.js                            │
+│                                                            │
+│  📱 PWA (Progressive Web App):                             │
+│    ├── Manifest.json configurado                           │
+│    ├── Service Worker para cache                           │
+│    ├── Instalável como app nativo                          │
+│    └── Funcionalidade offline básica                       │
+│                                                            │
+│  📊 Gráficos de Confiança:                                 │
+│    ├── Barras de progresso animadas                        │
+│    ├── Sistema de cores por confiança                      │
+│    ├── Tooltips informativos                               │
+│    └── Responsividade completa                             │
+│                                                            │
+│  💾 Histórico Local:                                       │
+│    ├── Armazenamento no localStorage                       │
+│    ├── Persistência entre sessões                          │
+│    ├── Opção de limpeza de dados                           │
+│    └── Exportação de histórico                             │
+│                                                            │
+│  🔄 Auto-refresh:                                          │
+│    ├── Atualização automática de resultados               │
+│    ├── Toggle de ativação/desativação                      │
+│    ├── Persistência de configuração                        │
+│    └── Feedback visual de status                           │
+└─────────────────────────────────────────────────────────────┘
+```
+
 ## 🔮 Roadmap de Melhorias
 
 ```
@@ -350,9 +401,10 @@
 │    └── Análise de contexto                                 │
 │                                                            │
 │  🔧 Fase 3 - Funcionalidades Avançadas:                   │
-│    ├── API REST completa                                   │
-│    ├── Integração com email                                │
+│    ├── Sincronização em nuvem                              │
+│    ├── Notificações push                                   │
 │    ├── Dashboard analytics                                 │
+│    ├── Integração com email                                │
 │    └── Múltiplos formatos de arquivo                       │
 └─────────────────────────────────────────────────────────────┘
 ```

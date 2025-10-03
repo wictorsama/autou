@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background Circle -->
+  <circle cx="256" cy="256" r="240" fill="url(#gradient)" stroke="#ffffff" stroke-width="8"/>
+  
+  <!-- Email Icon -->
+  <g transform="translate(256,256)">
+    <!-- Envelope Base -->
+    <rect x="-120" y="-60" width="240" height="160" rx="20" ry="20" fill="#ffffff" opacity="0.95"/>
+    
+    <!-- Envelope Flap -->
+    <path d="M -120,-60 L 0,20 L 120,-60 Z" fill="#ffffff" opacity="0.9"/>
+    
+    <!-- AI Brain Symbol -->
+    <g transform="translate(0,-20)">
+      <!-- Central Node -->
+      <circle cx="0" cy="0" r="8" fill="#4f46e5"/>
+      
+      <!-- Neural Network Lines -->
+      <g stroke="#4f46e5" stroke-width="2" fill="none">
+        <line x1="-25" y1="-15" x2="-8" y2="-8"/>
+        <line x1="25" y1="-15" x2="8" y2="-8"/>
+        <line x1="-25" y1="15" x2="-8" y2="8"/>
+        <line x1="25" y1="15" x2="8" y2="8"/>
+        <line x1="0" y1="-25" x2="0" y2="-8"/>
+        <line x1="0" y1="25" x2="0" y2="8"/>
+      </g>
+      
+      <!-- Outer Nodes -->
+      <circle cx="-25" cy="-15" r="4" fill="#7c3aed"/>
+      <circle cx="25" cy="-15" r="4" fill="#7c3aed"/>
+      <circle cx="-25" cy="15" r="4" fill="#7c3aed"/>
+      <circle cx="25" cy="15" r="4" fill="#7c3aed"/>
+      <circle cx="0" cy="-25" r="4" fill="#7c3aed"/>
+      <circle cx="0" cy="25" r="4" fill="#7c3aed"/>
+    </g>
+    
+    <!-- Classification Indicators -->
+    <g transform="translate(0,50)">
+      <!-- Productive Indicator -->
+      <circle cx="-30" cy="0" r="12" fill="#10b981"/>
+      <path d="M -35,-2 L -28,5 L -22,-8" stroke="#ffffff" stroke-width="2" fill="none" stroke-linecap="round"/>
+      
+      <!-- Unproductive Indicator -->
+      <circle cx="30" cy="0" r="12" fill="#ef4444"/>
+      <path d="M 25,-5 L 35,5 M 35,-5 L 25,5" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+    </g>
+  </g>
+  
+  <!-- AutoU Text -->
+  <text x="256" y="420" font-family="Arial, sans-serif" font-size="48" font-weight="bold" text-anchor="middle" fill="#ffffff">AutoU</text>
+</svg>

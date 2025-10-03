@@ -57,7 +57,7 @@ def classify_email(text: str) -> Dict:
     # Intenção (top‑1)
     intent = clf(processed, LABELS_INTENT, multi_label=False)
     top_intent = intent["labels"][0]
-;    intent_score = float(intent["scores"][0])
+    intent_score = float(intent["scores"][0])
     
     # Ajuste: emails de agradecimento/felicitação devem ser improdutivos
     if "agradecimento" in top_intent.lower() or "felicitação" in top_intent.lower():

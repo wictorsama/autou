@@ -19,8 +19,13 @@ autou/
 │   ├── nlp.py             # Módulo de processamento de linguagem natural
 │   ├── responders.py      # Templates de resposta automática
 │   ├── utils.py           # Utilitários gerais
-│   ├── static/            # Arquivos estáticos (CSS, JS)
+│   ├── static/            # Arquivos estáticos
+│   │   ├── styles.css     # Estilos CSS com dark mode
+│   │   ├── app.js         # JavaScript principal com Alpine.js
+│   │   ├── manifest.json  # PWA manifest
+│   │   └── sw.js          # Service Worker para PWA
 │   └── templates/         # Templates HTML
+│       └── index.html     # Interface principal
 ├── sample_emails/         # Exemplos de e-mails para teste
 ├── tests/                 # Testes automatizados
 └── requirements.txt       # Dependências Python
@@ -29,13 +34,19 @@ autou/
 ### Componentes Principais
 
 #### 1. **Frontend (Interface Web)**
-- **Tecnologia**: HTML5, CSS3, JavaScript vanilla
+- **Tecnologia**: HTML5, CSS3, JavaScript vanilla, Alpine.js, Tailwind CSS
 - **Localização**: `app/templates/index.html`, `app/static/`
 - **Funcionalidades**:
   - Interface para upload de arquivos (.txt, .pdf)
   - Campo de texto para inserção manual de e-mails
-  - Exibição de resultados de classificação
+  - Exibição de resultados de classificação com gráficos visuais
   - Visualização de respostas sugeridas
+  - **Dark Mode**: Toggle com persistência no localStorage
+  - **PWA**: Progressive Web App com manifest e service worker
+  - **Auto-refresh**: Atualização automática de resultados
+  - **Histórico Local**: Armazenamento de classificações no localStorage
+  - **Gráficos de Confiança**: Visualização interativa dos scores
+  - **Animações**: Transições suaves e feedback visual
 
 #### 2. **Backend API (FastAPI)**
 - **Arquivo principal**: `app/main.py`
@@ -192,6 +203,35 @@ O sistema possui templates específicos para cada tipo de intenção:
 - **Cache de Modelos**: Modelos carregados uma única vez na inicialização
 - **Processamento Assíncrono**: FastAPI com suporte async/await
 - **Validação de Entrada**: Limitação de tamanho e formato de arquivos
+- **PWA Caching**: Service Worker para cache offline
+- **LocalStorage**: Persistência de configurações e histórico
+- **CSS Otimizado**: Tailwind CSS para bundle menor
+
+## 🎨 Funcionalidades da Interface
+
+### Dark Mode
+- **Implementação**: CSS custom properties com Alpine.js
+- **Persistência**: localStorage para manter preferência
+- **Transições**: Animações suaves entre temas
+- **Cobertura**: Todos os elementos da interface
+
+### PWA (Progressive Web App)
+- **Manifest**: Configuração para instalação como app
+- **Service Worker**: Cache offline e notificações
+- **Responsivo**: Design adaptável para mobile/desktop
+- **Offline**: Funcionalidade básica sem conexão
+
+### Gráficos de Confiança
+- **Visualização**: Barras de progresso animadas
+- **Cores**: Sistema de cores baseado em confiança
+- **Interatividade**: Tooltips com informações detalhadas
+- **Responsividade**: Adaptação para diferentes telas
+
+### Histórico Local
+- **Armazenamento**: localStorage para classificações
+- **Persistência**: Dados mantidos entre sessões
+- **Limpeza**: Opção para limpar histórico
+- **Exportação**: Possibilidade de download dos dados
 
 ## 🔮 Limitações e Melhorias Futuras
 
@@ -200,6 +240,7 @@ O sistema possui templates específicos para cada tipo de intenção:
 2. **Contexto Limitado**: Não considera histórico de conversas
 3. **Idioma**: Otimizado principalmente para português
 4. **Regras Fixas**: Sistema de refinamento baseado em regras hard-coded
+5. **Armazenamento Local**: Histórico limitado ao navegador
 
 ### Melhorias Propostas
 1. **Sistema de Feedback**: Coleta de avaliações do usuário
@@ -207,6 +248,8 @@ O sistema possui templates específicos para cada tipo de intenção:
 3. **Análise de Contexto**: Consideração do histórico de e-mails
 4. **Personalização**: Adaptação por usuário/empresa
 5. **Métricas Avançadas**: Dashboard de performance e analytics
+6. **Sincronização**: Backup do histórico em nuvem
+7. **Notificações Push**: Alertas para emails importantes
 
 ## 🧪 Testes e Validação
 
