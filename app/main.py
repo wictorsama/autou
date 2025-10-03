@@ -177,6 +177,8 @@ async def process_email(
             status_code=500
         )
 
+    # Retornar resultado da classificação
+    try:
         return ProcessResponse(
             category=clf["category"],
             category_score=clf["category_score"],
@@ -185,7 +187,6 @@ async def process_email(
             suggested_reply=reply["reply"],
             reply_source=reply["source"],
         )
-    
     except Exception as e:
         # Log do erro e limpeza de memória
         gc.collect()
@@ -193,7 +194,6 @@ async def process_email(
             {"detail": f"Erro interno do servidor: {str(e)}"}, 
             status_code=500
         )
-    
     finally:
         # Limpeza final de memória
         cleanup_memory()
