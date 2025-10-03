@@ -128,6 +128,15 @@ async def process_email(
                 {"detail": "Envie um arquivo .txt/.pdf ou cole o texto."}, 
                 status_code=400
             )
+    except Exception as e:
+        return JSONResponse(
+            {"detail": f"Erro no processamento: {str(e)}"}, 
+            status_code=500
+        )
+    finally:
+        # Limpeza final de memória
+        content = None
+        gc.collect()
 
     # Validar conteúdo
     if not raw.strip():

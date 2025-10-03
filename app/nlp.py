@@ -32,21 +32,21 @@ def get_classifier():
     if _zsl_cls is None:
         try:
             _zsl_cls = pipeline(
-                 "zero-shot-classification",
-                 model=Config.ZSL_MODEL,
-                 return_all_scores=True,
-                 device=-1,  # CPU
-             )
-         except Exception as e:
-             print(f"Erro ao carregar modelo principal {Config.ZSL_MODEL}: {e}")
-             print(f"Tentando modelo fallback: {Config.ZSL_MODEL_FALLBACK}")
-             try:
-                 _zsl_cls = pipeline(
-                     "zero-shot-classification",
-                     model=Config.ZSL_MODEL_FALLBACK,
-                     return_all_scores=True,
-                     device=-1,  # CPU
-                 )
+                "zero-shot-classification",
+                model=Config.ZSL_MODEL,
+                return_all_scores=True,
+                device=-1,  # CPU
+            )
+        except Exception as e:
+            print(f"Erro ao carregar modelo principal {Config.ZSL_MODEL}: {e}")
+            print(f"Tentando modelo fallback: {Config.ZSL_MODEL_FALLBACK}")
+            try:
+                _zsl_cls = pipeline(
+                    "zero-shot-classification",
+                    model=Config.ZSL_MODEL_FALLBACK,
+                    return_all_scores=True,
+                    device=-1,  # CPU
+                )
             except Exception as e2:
                 print(f"Erro ao carregar modelo fallback: {e2}")
                 raise e2
