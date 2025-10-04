@@ -18,6 +18,8 @@ O AutoU é um sistema inteligente de classificação e resposta automática de e
 - **Gráficos de Confiança**: Barras de progresso visuais com gradientes coloridos
 - **Auto-refresh**: Classificação automática após 2 segundos de digitação
 - **Feedback Visual**: Estados de loading, notificações e indicadores visuais
+- **Toast Otimizado**: Notificações no canto inferior direito com responsividade mobile
+- **UX Mobile**: Interface adaptada para dispositivos móveis seguindo convenções nativas
 
 ### 📱 **PWA (Progressive Web App)**
 - **Instalável**: Pode ser instalado como app nativo no dispositivo
@@ -348,7 +350,9 @@ Para informações técnicas detalhadas, consulte a [documentação completa](./
 
 - **[Arquitetura do Sistema](./docs/ARQUITETURA.md)** - Documentação técnica completa
 - **[Design e UX](./docs/DESIGN_ARCHITECTURE.md)** - Arquitetura visual e fluxos
-- **[Índice da Documentação](./docs/README.md)** - Guia completo da documentação
+- **[Melhorias UX](./docs/MELHORIAS_UX.md)** - Toast reposicionado e otimizações mobile PWA
+- **[Changelog](./docs/CHANGELOG.md)** - Histórico de mudanças do projeto
+- **[Índice da Documentação](./docs/INDICE_DOCUMENTACAO.md)** - Guia completo da documentação
 
 ## 🔒 Privacidade e LGPD
 
@@ -356,6 +360,19 @@ Para informações técnicas detalhadas, consulte a [documentação completa](./
 - Não armazenamento de e-mails
 - Integração opcional com OpenAI (configurável)
 - Logs mínimos para debugging
+
+## 🚀 Otimizações de Memória
+
+**Implementadas para resolver problemas de limite de memória no Render:**
+
+- ✅ **Configurações centralizadas** com monitoramento de memória
+- ✅ **Limpeza automática de memória** com garbage collection
+- ✅ **Limites otimizados**: arquivos (5MB), texto (10k chars)
+- ✅ **Modelo NLP otimizado** com fallback automático
+- ✅ **Dependências otimizadas** com versões específicas
+- ✅ **Monitoramento em tempo real** via endpoint `/health`
+
+📋 **Documentação completa**: [OTIMIZACOES_PERFORMANCE.md](./docs/OTIMIZACOES_PERFORMANCE.md)
 
 ## 🚧 Roadmap
 

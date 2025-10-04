@@ -44,6 +44,76 @@
   transform: translateY(0);
 }
 
+/* Novos estilos para botões modernos */
+.btn-modern {
+  @apply inline-flex items-center justify-center px-6 py-3 rounded-xl font-medium text-sm transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 shadow-sm border cursor-pointer;
+  transform: translateY(0);
+}
+
+.btn-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.btn-modern.btn-outline {
+  @apply border-gray-300 text-gray-700 bg-white focus:ring-gray-500;
+}
+
+.btn-modern.btn-outline:hover {
+  @apply bg-blue-50 border-blue-400 text-blue-700;
+  border-radius: 1rem;
+}
+
+.btn-modern.btn-primary {
+  @apply border-transparent bg-emerald-600 text-white focus:ring-emerald-500 shadow-md;
+}
+
+.btn-modern.btn-primary:hover {
+  @apply bg-emerald-700;
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+}
+
+.btn-modern.btn-danger {
+  @apply border-transparent bg-red-600 text-white focus:ring-red-500 shadow-md;
+}
+
+.btn-modern.btn-danger:hover {
+  @apply bg-red-700;
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.4);
+}
+
+.btn-modern:disabled {
+  @apply opacity-50 cursor-not-allowed;
+  transform: translateY(0) !important;
+  box-shadow: none !important;
+}
+
+.btn-modern.btn-outline:disabled {
+  @apply border-gray-200 text-gray-400 bg-gray-50;
+}
+
+.btn-modern.btn-outline:disabled:hover {
+  @apply bg-gray-50 border-gray-200 text-gray-400;
+}
+
+.btn-modern.btn-primary:disabled {
+  @apply bg-gray-400;
+}
+
+.btn-modern.btn-primary:disabled:hover {
+  @apply bg-gray-400;
+}
+
+.btn-modern.btn-danger:disabled {
+  @apply bg-gray-400;
+}
+
+.btn-modern.btn-danger:disabled:hover {
+  @apply bg-gray-400;
+}
+
 /* Badge com animação */
 .badge { 
   @apply inline-flex items-center px-2 py-1 rounded-full text-xs font-medium;
@@ -119,6 +189,37 @@ textarea:focus {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Toast/Notification styles for mobile PWA */
+.toast-mobile {
+  @media (max-width: 640px) {
+    position: fixed !important;
+    bottom: 20px !important;
+    left: 16px !important;
+    right: 16px !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+}
+
+/* PWA mobile optimizations */
+@media (display-mode: standalone) {
+  /* Quando executado como PWA */
+  .toast-mobile {
+    bottom: 30px !important;
+    left: 16px !important;
+    right: 16px !important;
+  }
+  
+  /* Ajustar botões de controle para PWA */
+  .dark-mode-toggle {
+    top: 30px !important;
+  }
+  
+  .auto-refresh-toggle {
+    top: 30px !important;
+  }
 }
 
 /* Dark mode toggle */
@@ -214,4 +315,46 @@ textarea:focus {
   background-color: #1e293b;
   border-color: #334155;
   color: #f1f5f9;
+}
+
+/* Dark mode styles para botões modernos */
+.dark .btn-modern.btn-outline {
+  @apply border-slate-600 text-slate-200 bg-slate-800;
+}
+
+.dark .btn-modern.btn-outline:hover {
+  @apply bg-blue-900 border-blue-500 text-blue-200;
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.3);
+}
+
+.dark .btn-modern.btn-primary:hover {
+  @apply bg-emerald-600;
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(16, 185, 129, 0.5);
+}
+
+.dark .btn-modern.btn-danger:hover {
+  @apply bg-red-600;
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(239, 68, 68, 0.5);
+}
+
+.dark .btn-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+}
+
+.dark .btn-modern:disabled {
+  @apply opacity-50 cursor-not-allowed;
+  transform: translateY(0) !important;
+  box-shadow: none !important;
+}
+
+.dark .btn-modern.btn-outline:disabled {
+  @apply border-slate-700 text-slate-500 bg-slate-800;
+}
+
+.dark .btn-modern.btn-outline:disabled:hover {
+  @apply bg-slate-800 border-slate-700 text-slate-500;
 }

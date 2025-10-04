@@ -336,10 +336,12 @@
 │    ├── Improdutivo: ~90-95%                                │
 │    └── Overall: ~87-92%                                    │
 │                                                            │
-│  ⚡ Performance:                                            │
+│  ⚡ Performance (Otimizado):                               │
 │    ├── Tempo de Resposta: <2s                              │
 │    ├── Throughput: ~100 req/min                            │
-│    └── Memory Usage: ~512MB                                │
+│    ├── Memory Usage: ~256MB (reduzido 50%)                 │
+│    ├── Garbage Collection: Automático                      │
+│    └── Monitoramento: Tempo real via /health               │
 │                                                            │
 │  🔍 Confidence Scores:                                     │
 │    ├── Alto (>0.8): ~70% dos casos                        │
@@ -390,8 +392,16 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                  Próximas Funcionalidades                  │
+│                  Funcionalidades e Roadmap                 │
 ├─────────────────────────────────────────────────────────────┤
+│  ✅ Fase 0 - Otimizações de Memória (CONCLUÍDA):          │
+│    ├── ✅ Configurações centralizadas                      │
+│    ├── ✅ Limpeza automática de memória                    │
+│    ├── ✅ Monitoramento em tempo real                      │
+│    ├── ✅ Modelo NLP otimizado com fallback                │
+│    ├── ✅ Limites de arquivo e texto otimizados            │
+│    └── ✅ Dependências otimizadas                          │
+│                                                            │
 │  📈 Fase 1 - Sistema de Feedback:                          │
 │    ├── Interface de avaliação                              │
 │    ├── Banco de dados SQLite                               │
@@ -417,6 +427,6 @@
 
 **📝 Nota:** Este documento complementa a documentação técnica em `ARQUITETURA.md`, fornecendo uma visão visual e estrutural do sistema AutoU Email Classifier.
 
-**🔄 Última atualização:** Janeiro 2025
+**🔄 Última atualização:** 03 de Outubro de 2025
 **👨‍💻 Desenvolvido para:** Processo Seletivo AutoU
 **🎯 Objetivo:** Demonstrar arquitetura e design de sistema completo

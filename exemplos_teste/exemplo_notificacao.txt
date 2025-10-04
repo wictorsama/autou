@@ -1,0 +1,7 @@
+Notificação Automática do Sistema
+
+Sua senha expirará em 7 dias.
+Para renovar, acesse: sistema.empresa.com/senha
+
+Esta é uma mensagem automática, não responda.
+noreply@empresa.com
