@@ -16,13 +16,25 @@ _zsl_cls = None
 _intent_cls = None
 
 LABELS_CATEGORY = ["Email produtivo que requer ação", "Email improdutivo sem necessidade de ação"]
+# Intenções mais específicas e convencionais para emails corporativos
 LABELS_INTENT = [
-    "Solicitação de status ou informações",
-    "Envio de documentos ou arquivos",
-    "Dúvida técnica ou suporte",
+    # Produtivos - Requerem ação
+    "Solicitação de status ou acompanhamento",
+    "Pedido de informações ou esclarecimentos", 
+    "Envio de documentos ou arquivos importantes",
+    "Dúvida técnica ou solicitação de suporte",
+    "Agendamento de reunião ou compromisso",
+    "Aprovação ou autorização necessária",
+    "Cobrança ou follow-up de pendências",
+    "Solicitação de orçamento ou proposta",
+    
+    # Improdutivos - Informativos ou sociais
     "Agradecimento ou felicitação",
+    "Confirmação ou comunicado informativo",
     "Conversa informal ou social",
-    "Spam ou marketing"
+    "Spam ou marketing",
+    "Notificação automática do sistema",
+    "Convite para evento ou treinamento"
 ]
 
 
@@ -82,6 +94,32 @@ def classify_email(text: str) -> Dict:
         intent = clf(processed, LABELS_INTENT, multi_label=False)
         top_intent = intent["labels"][0]
         intent_score = float(intent["scores"][0])
+        
+        # Refinamento inteligente baseado em palavras-chave específicas
+        text_lower = text.lower()
+        
+        # Detecção de intenções produtivas específicas
+        if any(word in text_lower for word in ["status", "andamento", "situação", "acompanhamento", "posição"]):
+            top_intent = "Solicitação de status ou acompanhamento"
+            category = "Produtivo"
+        elif any(word in text_lower for word in ["reunião", "meeting", "agendar", "marcar", "disponibilidade", "horário"]):
+            top_intent = "Agendamento de reunião ou compromisso"
+            category = "Produtivo"
+        elif any(word in text_lower for word in ["aprovar", "aprovação", "autorizar", "autorização", "validar", "confirmar aprovação"]):
+            top_intent = "Aprovação ou autorização necessária"
+            category = "Produtivo"
+        elif any(word in text_lower for word in ["orçamento", "proposta", "cotação", "preço", "valor", "custo"]):
+            top_intent = "Solicitação de orçamento ou proposta"
+            category = "Produtivo"
+        elif any(word in text_lower for word in ["cobrança", "pendência", "follow-up", "followup", "prazo", "vencimento"]):
+            top_intent = "Cobrança ou follow-up de pendências"
+            category = "Produtivo"
+        elif any(word in text_lower for word in ["convite", "evento", "treinamento", "curso", "workshop", "palestra"]):
+            top_intent = "Convite para evento ou treinamento"
+            category = "Improdutivo"
+        elif any(word in text_lower for word in ["notificação", "automático", "sistema", "noreply", "no-reply"]):
+            top_intent = "Notificação automática do sistema"
+            category = "Improdutivo"
         
         # Ajuste: emails de agradecimento/felicitação devem ser improdutivos
         if "agradecimento" in top_intent.lower() or "felicitação" in top_intent.lower():

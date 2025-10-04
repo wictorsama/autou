@@ -9,6 +9,33 @@ function emailApp(){
     autoRefresh: localStorage.getItem('autoRefresh') === 'true',
     refreshTimeout: null,
     lastProcessedText: '',
+    notification: {
+      show: false,
+      message: "",
+      type: "info" // success, error, info
+    },
+    confirmDialog: {
+      show: false,
+      title: "",
+      message: "",
+      onConfirm: null,
+      onReject: null,
+      confirm() {
+        if (this.onConfirm) this.onConfirm();
+        this.hide();
+      },
+      reject() {
+        if (this.onReject) this.onReject();
+        this.hide();
+      },
+      hide() {
+        this.show = false;
+        this.title = "";
+        this.message = "";
+        this.onConfirm = null;
+        this.onReject = null;
+      }
+    },
     
     init() {
       // Aplicar dark mode no carregamento
@@ -20,6 +47,9 @@ function emailApp(){
       if (this.autoRefresh) {
         this.setupAutoRefresh();
       }
+      
+      // Configurar atalhos de teclado
+      this.setupKeyboardShortcuts();
     },
     
     setupAutoRefresh() {
@@ -74,10 +104,49 @@ function emailApp(){
     },
     
     clearAll(){ 
-      this.rawText = ""; 
-      this.file = null; 
-      this.result = null;
-      this.showNotification('Campos limpos', 'info');
+      // Verificar se há conteúdo no textarea e nas variáveis
+      const textArea = document.querySelector('textarea');
+      const textAreaValue = textArea ? textArea.value : '';
+      
+      const hasContent = this.rawText || this.file || this.result || textAreaValue;
+      
+      if (hasContent) {
+        this.showConfirm(
+          'Limpar todos os campos',
+          'Tem certeza que deseja limpar todos os campos? Esta ação não pode ser desfeita.',
+          () => {
+            // Limpar as variáveis do Alpine.js primeiro
+            this.rawText = ""; 
+            this.file = null; 
+            this.result = null;
+            
+            // Forçar limpeza do textarea e disparar evento para Alpine.js detectar
+            if (textArea) {
+              textArea.value = '';
+              // Disparar evento de input para que o Alpine.js detecte a mudança
+              textArea.dispatchEvent(new Event('input', { bubbles: true }));
+            }
+            
+            // Limpar também o input de arquivo
+            const fileInput = document.querySelector('input[type="file"]');
+            if (fileInput) {
+              fileInput.value = '';
+              // Disparar evento de change para o input de arquivo
+              fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+            }
+            
+            // Forçar atualização do Alpine.js
+            this.$nextTick(() => {
+              // Garantir que a UI foi atualizada completamente
+              this.$el.dispatchEvent(new CustomEvent('alpine:updated'));
+            });
+            
+            this.showNotification('Campos limpos com sucesso', 'success');
+          }
+        );
+      } else {
+        this.showNotification('Não há conteúdo para limpar', 'info');
+      }
     },
     
     async autoSubmit() {
@@ -187,9 +256,20 @@ function emailApp(){
     },
     
     clearHistory() {
-      this.history = [];
-      localStorage.removeItem('emailHistory');
-      this.showNotification('Histórico limpo', 'info');
+      if (this.history.length === 0) {
+        this.showNotification('Histórico já está vazio', 'info');
+        return;
+      }
+      
+      this.showConfirm(
+        'Limpar histórico',
+        'Tem certeza que deseja limpar todo o histórico? Esta ação não pode ser desfeita.',
+        () => {
+          this.history = [];
+          localStorage.removeItem('emailHistory');
+          this.showNotification('Histórico limpo com sucesso', 'success');
+        }
+      );
     },
     
     loadFromHistory(entry) {
@@ -199,25 +279,22 @@ function emailApp(){
     },
     
     showNotification(message, type = 'info') {
-      // Criar elemento de notificação
-      const notification = document.createElement('div');
-      notification.className = `fixed top-4 right-4 z-50 px-4 py-2 rounded-lg shadow-lg text-white text-sm animate-fade-in ${
-        type === 'success' ? 'bg-green-500' :
-        type === 'error' ? 'bg-red-500' :
-        type === 'warning' ? 'bg-yellow-500' :
-        'bg-blue-500'
-      }`;
-      notification.textContent = message;
+      this.notification.message = message;
+      this.notification.type = type;
+      this.notification.show = true;
       
-      document.body.appendChild(notification);
-      
-      // Remover após 3 segundos
+      // Auto-hide após 3 segundos
       setTimeout(() => {
-        notification.style.opacity = '0';
-        setTimeout(() => {
-          document.body.removeChild(notification);
-        }, 200);
+        this.notification.show = false;
       }, 3000);
+    },
+
+    showConfirm(title, message, onConfirm, onReject = null) {
+      this.confirmDialog.title = title;
+      this.confirmDialog.message = message;
+      this.confirmDialog.onConfirm = onConfirm;
+      this.confirmDialog.onReject = onReject;
+      this.confirmDialog.show = true;
     },
     
     getConfidenceColor(score) {
@@ -228,6 +305,32 @@ function emailApp(){
     
     formatTimestamp(timestamp) {
       return new Date(timestamp).toLocaleString('pt-BR');
+    },
+
+    setupKeyboardShortcuts() {
+      document.addEventListener('keydown', (e) => {
+        // Ctrl+Enter para classificar
+        if (e.ctrlKey && e.key === 'Enter') {
+          e.preventDefault();
+          if (!this.loading && (this.rawText || this.file)) {
+            this.submit();
+          }
+        }
+        // Ctrl+L para limpar
+        if (e.ctrlKey && e.key === 'l') {
+          e.preventDefault();
+          if (this.rawText || this.file || this.result) {
+            this.clearAll();
+          }
+        }
+        // Ctrl+C para copiar (quando há resposta sugerida)
+        if (e.ctrlKey && e.key === 'c' && e.shiftKey) {
+          e.preventDefault();
+          if (this.result?.suggested_reply) {
+            this.copyReply();
+          }
+        }
+      });
     }
   }
 }
