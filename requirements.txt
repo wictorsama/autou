@@ -1,4 +1,4 @@
-;# Core ML and NLP (versões otimizadas para memória)
+# Core ML and NLP (versões otimizadas para memória)
 torch>=2.0.0,<2.2.0
 numpy>=1.24.0,<1.26.0
 transformers>=4.30.0,<4.35.0
