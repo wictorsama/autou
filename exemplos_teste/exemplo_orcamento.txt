@@ -1,0 +1,11 @@
+Prezados,
+
+Gostaria de solicitar um orçamento para o desenvolvimento de um sistema web.
+Precisamos de uma plataforma com as seguintes funcionalidades:
+- Cadastro de usuários
+- Dashboard administrativo
+- Relatórios gerenciais
+
+Por favor, enviem proposta com prazo e valor.
+
+Obrigado.

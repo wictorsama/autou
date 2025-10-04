@@ -427,6 +427,6 @@
 
 **📝 Nota:** Este documento complementa a documentação técnica em `ARQUITETURA.md`, fornecendo uma visão visual e estrutural do sistema AutoU Email Classifier.
 
-**🔄 Última atualização:** Janeiro 2025
+**🔄 Última atualização:** 03 de Outubro de 2025
 **👨‍💻 Desenvolvido para:** Processo Seletivo AutoU
 **🎯 Objetivo:** Demonstrar arquitetura e design de sistema completo
