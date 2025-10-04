@@ -2,7 +2,45 @@
 
 Esta pasta contém arquivos e scripts relacionados ao deploy e configuração da aplicação AutoU.
 
-## 📁 Arquivos
+## 🆕 **NOVO: Migração para AWS Lambda**
+
+Devido às limitações de memória do Render para modelos de ML, agora oferecemos migração completa para AWS Lambda:
+
+### 📁 Arquivos AWS
+- `GUIA_MIGRACAO_AWS.md` - Guia completo de migração
+- `setup_aws_lambda.py` - Script de configuração automática
+- `lambda_config.py` - Configurações otimizadas para Lambda
+- `test_before_deploy.py` - Testes antes do deploy
+
+### 🚀 Migração Rápida (5 minutos)
+```bash
+# 1. Configurar AWS CLI
+aws configure
+
+# 2. Instalar Serverless Framework
+npm install -g serverless
+
+# 3. Executar configuração automática
+python deploy/setup_aws_lambda.py
+
+# 4. Configurar variáveis
+cp .env.example .env
+# Editar .env com OPENAI_API_KEY
+
+# 5. Testar
+python deploy/test_before_deploy.py
+
+# 6. Deploy
+serverless deploy
+```
+
+**💰 Custo**: ~$2-20/mês (vs $25-85 no Render)  
+**⚡ Performance**: 3GB RAM dedicada  
+**🔧 Escalabilidade**: Automática  
+
+---
+
+## 📁 Arquivos Render (Legado)
 
 ### 🔧 **deploy.sh**
 Script automatizado para deploy em diferentes plataformas.
