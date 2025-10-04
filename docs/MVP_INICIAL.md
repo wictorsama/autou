@@ -49,7 +49,8 @@ autou-email-ai/
 - **UI**: HTML + Tailwind (CDN) + Alpine.js. Drag & drop, colar texto, **prévias** de texto, **badge** de categoria, **cópia rápida** da resposta.
 - **Backend**: FastAPI, endpoints `/api/process` e `/health`. Respostas em JSON. CORS pronto.
 - **Deploy**:
-  - **Render** (grátis): `render.yaml` + `Procfile`.
+  - **AWS Lambda** (recomendado): Serverless Framework + `serverless.yml`
+  - **Render** (legado): `render.yaml` + `Procfile`
   - **Hugging Face Spaces** (Gradio opcional) **ou** qualquer serviço com Dockerfile.
 - **Testes**: `pytest` cobre sucesso de `/api/process` e classificação básica.
 
@@ -572,7 +573,15 @@ No `.env`, defina `OPENAI_API_KEY` para o refinamento das respostas. Sem a chave
 pytest -q
 ```
 
-## ☁️ Deploy (Render.com)
+## ☁️ Deploy (AWS Lambda - Recomendado)
+
+1. **Configurar AWS CLI**: `aws configure`
+2. **Instalar Serverless**: `npm install -g serverless`
+3. **Deploy**: `cd deploy && npx serverless deploy`
+
+**Status atual**: ✅ Funcionando em `https://x1r6i3udxg.execute-api.us-east-1.amazonaws.com/dev/`
+
+## ☁️ Deploy (Render.com - Legado)
 1. Faça **fork** deste repositório.
 2. No Render: **New + Web Service** → conecte ao GitHub → *Environment*: `Python` → *Build Command*: `pip install -r requirements.txt` → *Start Command*: `uvicorn app.main:app --host 0.0.0.0 --port 10000` (ou use `Procfile`).
 3. Defina env vars (opcional): `OPENAI_API_KEY`, `ZSL_MODEL`.

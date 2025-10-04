@@ -40,10 +40,25 @@ O AutoU é um sistema inteligente de classificação e resposta automática de e
 - **Frontend**: HTML5, Tailwind CSS, Alpine.js, CSS Animations
 - **PWA**: Service Worker, Web App Manifest, LocalStorage
 - **Testes**: pytest, TestClient
-- **Deploy**: Docker, Render.com, Heroku
+- **Deploy**: AWS Lambda, Serverless Framework, Docker
 - **Arquivos**: PDFMiner, Multipart Forms
 
-## 📦 Instalação
+## 🌐 Deploy em Produção
+
+### AWS Lambda (Recomendado)
+O AutoU está configurado para deploy na AWS Lambda usando Serverless Framework:
+
+- **✅ Status**: Funcionando
+- **🔗 URL**: `https://x1r6i3udxg.execute-api.us-east-1.amazonaws.com/dev/`
+- **📁 Guia**: Veja `deploy/GUIA_AWS_COMPLETO.md` para instruções detalhadas
+
+```bash
+cd deploy
+npm install
+npx serverless deploy
+```
+
+## 📦 Instalação Local
 
 ### Pré-requisitos
 - Python 3.11 ou superior

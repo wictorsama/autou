@@ -195,9 +195,9 @@ O sistema possui templates específicos para cada tipo de intenção:
 ## 🚀 Deployment e Escalabilidade
 
 ### Tecnologias de Deploy
-- **Docker**: Containerização da aplicação
-- **Render**: Plataforma de deploy em nuvem
-- **Procfile**: Configuração para Heroku-like platforms
+- **AWS Lambda**: Serverless computing para execução da aplicação
+- **API Gateway**: Gerenciamento de APIs REST com HTTPS
+- **Serverless Framework**: Orquestração e deploy automatizado
 
 ### Otimizações
 - **Cache de Modelos**: Modelos carregados uma única vez na inicialização

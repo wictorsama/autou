@@ -2,7 +2,7 @@
 
 ## Resumo das Otimizações Implementadas
 
-Este documento descreve as otimizações de memória implementadas para resolver problemas de limite de memória no Render.
+Este documento descreve as otimizações de memória implementadas para melhorar a performance da aplicação em ambientes de produção.
 
 ## 1. Configurações Centralizadas
 
@@ -68,7 +68,7 @@ Agora retorna informações de memória:
 
 ## 7. Variáveis de Ambiente
 
-Para configurar no Render:
+Para configurar em produção:
 
 ```bash
 # Limites de arquivo
@@ -78,7 +78,7 @@ MAX_PDF_SIZE=10485760  # 10MB
 
 # Configurações de memória
 ENABLE_MEMORY_CLEANUP=true
-GC_THRESHOLD=50  # Mais agressivo no Render
+GC_THRESHOLD=50  # Mais agressivo em produção
 
 # Modelo NLP (opcional)
 ZSL_MODEL=typeform/distilbert-base-uncased-mnli  # Usar modelo menor
@@ -108,4 +108,4 @@ LOG_LEVEL=INFO
 1. Reduzir `MAX_CHARS` para 5000
 2. Usar apenas o modelo fallback menor
 3. Reduzir `GC_THRESHOLD` para 25
-4. Aumentar a instância do Render se possível
+4. Aumentar os recursos da instância se possível

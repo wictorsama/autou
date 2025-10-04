@@ -1,55 +1,25 @@
-# 📚 Documentação Técnica - AutoU Email Classifier
+# 📚 Índice da Documentação - AutoU Email Classifier
 
-Esta pasta contém toda a documentação técnica detalhada do projeto AutoU Email Classifier.
+## 📋 Visão Geral
+Este diretório contém toda a documentação técnica e de arquitetura do projeto AutoU Email Classifier.
 
-## 📋 Índice de Documentação
+## 📁 Estrutura da Documentação
 
-### 🏗️ Arquitetura e Design
-- **[ARQUITETURA.md](./ARQUITETURA.md)** - Documentação técnica completa do sistema
-  - Visão geral e objetivos
-  - Estrutura de componentes
-  - Pipeline de processamento NLP
-  - Sistema de refinamento e métricas
-  - Fluxo de processamento
-  - Templates de resposta
-  - Deployment e escalabilidade
-  - Limitações e melhorias futuras
+### 🏗️ **Arquitetura e Design**
+- [`ARQUITETURA.md`](./ARQUITETURA.md) - Documentação completa da arquitetura do sistema
+- [`DESIGN_ARCHITECTURE.md`](./DESIGN_ARCHITECTURE.md) - Princípios de design e padrões arquiteturais
 
-- **[DESIGN_ARCHITECTURE.md](./DESIGN_ARCHITECTURE.md)** - Arquitetura de design e UX
-  - Diagramas visuais do sistema
-  - Fluxo de dados detalhado
-  - Componentes da interface
-  - Sistema de classificação
-  - Funcionalidades avançadas (PWA, Dark Mode)
-  - Roadmap de melhorias
+### 🚀 **Desenvolvimento e MVP**
+- [`MVP_INICIAL.md`](./MVP_INICIAL.md) - Especificações e requisitos do MVP inicial
 
-- **[MELHORIAS_UX.md](./MELHORIAS_UX.md)** - Melhorias de experiência do usuário
-  - Reposicionamento do toast/notificação
-  - Otimizações para mobile e PWA
-  - Convenções de UX aplicadas
-  - Responsividade inteligente
+### 🔧 **Melhorias e Otimizações**
+- [`MELHORIAS_INTENCOES.md`](./MELHORIAS_INTENCOES.md) - Melhorias no sistema de detecção de intenções
+- [`MELHORIAS_UX.md`](./MELHORIAS_UX.md) - Melhorias na experiência do usuário
+- [`OTIMIZACOES_PERFORMANCE.md`](./OTIMIZACOES_PERFORMANCE.md) - Otimizações de performance e memória
 
-- **[MELHORIAS_INTENCOES.md](./MELHORIAS_INTENCOES.md)** - Aprimoramentos na classificação de intenções
-  - Expansão de 6 para 16 tipos de intenção
-  - Sistema híbrido de detecção (IA + palavras-chave)
-  - Templates contextuais específicos
-  - Categorização produtivo/improdutivo refinada
-
-### 🚀 Otimizações e Performance
-- **[OTIMIZACOES_PERFORMANCE.md](./OTIMIZACOES_PERFORMANCE.md)** - Otimizações de performance e memória implementadas
-  - Configurações centralizadas
-  - Limpeza automática de memória
-  - Monitoramento em tempo real
-  - Modelo NLP otimizado
-  - Dependências otimizadas
-  - Guia de troubleshooting
-
-### 📝 Documentação Histórica
-- **[MVP_INICIAL.md](./MVP_INICIAL.md)** - Documentação inicial do MVP
-  - Estrutura original do projeto
-  - Código de exemplo e templates
-  - Configurações iniciais
-  - Roteiro de desenvolvimento
+## 🌐 **Deploy e Infraestrutura**
+- [`../deploy/GUIA_AWS_COMPLETO.md`](../deploy/GUIA_AWS_COMPLETO.md) - Guia completo de deploy na AWS Lambda
+- Status atual: ✅ **Funcionando** - `https://x1r6i3udxg.execute-api.us-east-1.amazonaws.com/dev/`
 
 ## 🎯 Como Usar Esta Documentação
 
