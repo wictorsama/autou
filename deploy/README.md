@@ -1,80 +1,74 @@
-# 🚀 Deploy e Configuração
+# 🚀 Deploy AWS Lambda - AutoU Email Classifier
 
-Esta pasta contém arquivos e scripts relacionados ao deploy e configuração da aplicação AutoU.
+Esta pasta contém os arquivos de configuração para deploy da aplicação AutoU na AWS Lambda usando Serverless Framework.
 
-## 📁 Arquivos
+## ✅ Status Atual
 
-### 🔧 **deploy.sh**
-Script automatizado para deploy em diferentes plataformas.
+- **✅ Deploy Realizado**: Janeiro 2025
+- **✅ API Funcionando**: `https://x1r6i3udxg.execute-api.us-east-1.amazonaws.com/dev/`
+- **✅ Função Lambda**: `autou-email-classifier-dev-app`
+- **✅ Região**: us-east-1
 
-**Uso:**
-```bash
-# Deploy local com Docker
-./deploy/deploy.sh local
+## 📁 Estrutura de Arquivos
 
-# Deploy no Render.com
-./deploy/deploy.sh render
-
-# Deploy no Railway
-./deploy/deploy.sh railway
-
-# Deploy no Heroku
-./deploy/deploy.sh heroku
-
-# Teste local
-./deploy/deploy.sh test
+```
+deploy/
+├── .env                    # Variáveis de ambiente (não commitado)
+├── .env.example           # Exemplo de variáveis de ambiente
+├── .serverless/           # Arquivos gerados pelo Serverless
+├── handler.py             # Função Lambda principal
+├── serverless.yml         # Configuração do Serverless Framework
+├── package.json           # Dependências Node.js
+├── requirements_aws.txt   # Dependências Python para AWS
+├── GUIA_AWS_COMPLETO.md  # Documentação completa
+└── README.md             # Este arquivo
 ```
 
-**Opções:**
-- `--build`: Force rebuild da imagem Docker
-- `--help`: Mostra ajuda completa
+## 🚀 Deploy Rápido
 
-### ⚙️ **.env.example**
-Template de variáveis de ambiente para configuração local.
+### Pré-requisitos
+1. **AWS CLI configurado** com credenciais
+2. **Node.js** instalado
+3. **Serverless Framework**
 
-**Configuração:**
+### Comandos
 ```bash
-# Copie o arquivo para a raiz do projeto
-cp deploy/.env.example .env
+# Navegar para a pasta deploy
+cd deploy
 
-# Edite as variáveis conforme necessário
-nano .env
+# Instalar dependências
+npm install
+
+# Deploy
+npx serverless deploy
+
+# Verificar status
+npx serverless info
 ```
 
-**Variáveis disponíveis:**
-- `OPENAI_API_KEY`: Chave da API OpenAI (opcional)
-- `OPENAI_MODEL`: Modelo OpenAI (padrão: gpt-4o-mini)
-- `ZSL_MODEL`: Modelo de classificação zero-shot
-- `HOST`: Host do servidor (padrão: 0.0.0.0)
-- `PORT`: Porta do servidor (padrão: 8000)
-- `MAX_TEXT_CHARS`: Limite de caracteres por texto
+## 💰 Custos
 
-## 🐳 Arquivos de Deploy na Raiz
+- **AWS Lambda**: Gratuito até 1M requisições/mês
+- **API Gateway**: ~$3.50 por 1M chamadas
+- **Total estimado**: $0-5/mês para uso normal
+## 📚 Documentação Adicional
 
-Os seguintes arquivos permanecem na raiz do projeto por serem automaticamente detectados pelas plataformas:
+- **[GUIA_AWS_COMPLETO.md](./GUIA_AWS_COMPLETO.md)** - Documentação completa com:
+  - Configurações detalhadas
+  - Troubleshooting
+  - Monitoramento
+  - Próximos passos
 
-- `Dockerfile` - Configuração do container Docker
-- `docker-compose.yml` - Orquestração de containers
-- `render.yaml` - Configuração do Render.com
-- `Procfile` - Configuração do Heroku
-- `requirements.txt` - Dependências Python
-- `.dockerignore` - Exclusões do Docker
-- `pytest.ini` - Configuração de testes
+- **[README principal](../README.md)** - Informações gerais do projeto
+- **[Documentação técnica](../docs/)** - Arquitetura e especificações
 
-## 📚 Documentação
+## 🔗 Links Úteis
 
-Para instruções detalhadas de deploy, consulte:
-- [README principal](../README.md) - Seção "🚀 Deploy em Produção"
-- [Documentação técnica](../docs/) - Arquitetura e configurações avançadas
+- [Serverless Framework](https://www.serverless.com/framework/docs/)
+- [AWS Lambda Documentation](https://docs.aws.amazon.com/lambda/)
+- [API Gateway Documentation](https://docs.aws.amazon.com/apigateway/)
 
-## 🔍 Verificação
+---
 
-Após o deploy, teste os endpoints:
-```bash
-# Health check
-curl https://your-app-url.com/health
-
-# Teste de classificação
-curl -X POST https://your-app-url.com/api/process \
-  -F "text=Preciso de ajuda com o sistema"
-```
+**Última atualização**: Janeiro 2025  
+**Status**: ✅ Funcionando

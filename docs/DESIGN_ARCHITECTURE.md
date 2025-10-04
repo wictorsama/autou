@@ -294,34 +294,34 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Cloud Deployment                        │
+│                    AWS Cloud Deployment                    │
 ├─────────────────────────────────────────────────────────────┤
-│  🌐 Render Platform                                         │
-│    ├── 🐳 Docker Container                                  │
+│  ☁️ AWS Lambda + API Gateway                               │
+│    ├── ⚡ Serverless Functions                              │
 │    │   ├── Python 3.11 Runtime                             │
-│    │   ├── FastAPI Application                              │
+│    │   ├── FastAPI Application (via Mangum)                │
 │    │   ├── Hugging Face Transformers                       │
-│    │   ├── Static Files Serving (PWA)                      │
+│    │   ├── Static Files via S3 + CloudFront               │
 │    │   └── Service Worker Support                          │
 │    │                                                       │
 │    ├── 📋 Configuration Files:                             │
-│    │   ├── render.yaml        ← Render Config              │
-│    │   ├── Dockerfile         ← Container Setup            │
-│    │   ├── Procfile          ← Process Definition          │
-│    │   ├── requirements.txt   ← Python Dependencies        │
+│    │   ├── serverless.yml     ← Serverless Config          │
+│    │   ├── handler.py         ← Lambda Handler             │
+│    │   ├── package.json       ← Node.js Dependencies       │
+│    │   ├── requirements_aws.txt ← Python Dependencies      │
 │    │   ├── manifest.json     ← PWA Configuration          │
 │    │   ├── sw.js             ← Service Worker              │
 │    │   └── deploy/            ← Deploy Scripts & Config    │
-│    │       ├── deploy.sh     ← Automated Deploy Script    │
+│    │       ├── GUIA_AWS_COMPLETO.md ← Complete AWS Guide   │
 │    │       ├── .env.example  ← Environment Template       │
 │    │       └── README.md     ← Deploy Instructions        │
 │    │                                                       │
-│    └── 🔧 Environment:                                      │
-│        ├── Auto-scaling                                    │
-│        ├── HTTPS/SSL (Required for PWA)                   │
-│        ├── CDN Integration                                 │
-│        ├── Health Monitoring                               │
-│        └── PWA Manifest Serving                            │
+│    └── 🔧 AWS Services:                                     │
+│        ├── Lambda Functions (Auto-scaling)                │
+│        ├── API Gateway (HTTPS/SSL)                        │
+│        ├── S3 + CloudFront (CDN)                          │
+│        ├── CloudWatch (Monitoring)                        │
+│        └── IAM Roles & Policies                           │
 └─────────────────────────────────────────────────────────────┘
 ```
 

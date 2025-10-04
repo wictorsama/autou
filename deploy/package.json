@@ -1,0 +1,16 @@
+{
+  "name": "deploy",
+  "version": "1.0.0",
+  "description": "Esta pasta contém arquivos e scripts relacionados ao deploy e configuração da aplicação AutoU.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "serverless-python-requirements": "^6.1.2",
+    "serverless-wsgi": "^3.1.0"
+  }
+}
