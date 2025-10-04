@@ -19,6 +19,9 @@ pdfminer.six==20221105
 # Development and Testing
 pytest>=7.4.0,<8.0.0
 
+# OpenAI API
+openai>=1.0.0,<2.0.0
+
 # Additional utilities (versões específicas)
 pydantic>=2.0.0,<2.6.0
 typing-extensions>=4.5.0,<4.9.0
