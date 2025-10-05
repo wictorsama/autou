@@ -1,0 +1,178 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" style="background: #f8fafc;">
+  <defs>
+    <linearGradient id="localGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1d4ed8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="awsGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d97706;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="dataGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Título -->
+  <text x="600" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1f2937">AutoU Email Classifier - Arquitetura do Sistema</text>
+  
+  <!-- Ambiente Local -->
+  <g id="local-env">
+    <rect x="50" y="80" width="500" height="320" rx="15" fill="url(#localGrad)" opacity="0.1" stroke="#3b82f6" stroke-width="2"/>
+    <text x="300" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1f2937">🖥️ Ambiente Local (Desenvolvimento)</text>
+    
+    <!-- Frontend Local -->
+    <rect x="80" y="130" width="200" height="80" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+    <text x="180" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1e40af">Frontend (index.html)</text>
+    <text x="180" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#374151">• Alpine.js + Tailwind CSS</text>
+    <text x="180" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#374151">• Dark Mode + Auto-refresh</text>
+    <text x="180" y="205" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#374151">• Upload + Histórico</text>
+    
+    <!-- Backend Local -->
+    <rect x="320" y="130" width="200" height="80" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1"/>
+    <text x="420" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1e40af">Backend (FastAPI)</text>
+    <text x="420" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#374151">• Python + FastAPI</text>
+    <text x="420" y="190" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#374151">• NLP + Classificação</text>
+    <text x="420" y="205" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#374151">• Resposta Automática</text>
+    
+    <!-- Componentes Locais -->
+    <rect x="80" y="240" width="120" height="60" rx="6" fill="#f3f4f6" stroke="#6b7280" stroke-width="1"/>
+    <text x="140" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#374151">NLP Engine</text>
+    <text x="140" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#6b7280">nlp.py</text>
+    <text x="140" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#6b7280">Classificação IA</text>
+    
+    <rect x="220" y="240" width="120" height="60" rx="6" fill="#f3f4f6" stroke="#6b7280" stroke-width="1"/>
+    <text x="280" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#374151">Responders</text>
+    <text x="280" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#6b7280">responders.py</text>
+    <text x="280" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#6b7280">Templates + IA</text>
+    
+    <rect x="360" y="240" width="120" height="60" rx="6" fill="#f3f4f6" stroke="#6b7280" stroke-width="1"/>
+    <text x="420" y="260" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#374151">Utils</text>
+    <text x="420" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#6b7280">utils.py</text>
+    <text x="420" y="290" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#6b7280">PDF + Validação</text>
+    
+    <!-- Porta Local -->
+    <rect x="200" y="330" width="100" height="30" rx="15" fill="#10b981" stroke="#059669" stroke-width="1"/>
+    <text x="250" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">:8000</text>
+  </g>
+  
+  <!-- Ambiente AWS -->
+  <g id="aws-env">
+    <rect x="650" y="80" width="500" height="320" rx="15" fill="url(#awsGrad)" opacity="0.1" stroke="#f59e0b" stroke-width="2"/>
+    <text x="900" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1f2937">☁️ AWS Cloud (Produção)</text>
+    
+    <!-- API Gateway -->
+    <rect x="680" y="130" width="200" height="60" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+    <text x="780" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#92400e">API Gateway</text>
+    <text x="780" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#374151">HTTPS Endpoints</text>
+    
+    <!-- Lambda Function -->
+    <rect x="920" y="130" width="200" height="60" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1"/>
+    <text x="1020" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#92400e">Lambda Function</text>
+    <text x="1020" y="175" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#374151">handler.py (Serverless)</text>
+    
+    <!-- Frontend AWS -->
+    <rect x="680" y="220" width="200" height="80" rx="8" fill="#fed7aa" stroke="#ea580c" stroke-width="1"/>
+    <text x="780" y="245" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#9a3412">Frontend Integrado</text>
+    <text x="780" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#374151">• Mesmo UI do Local</text>
+    <text x="780" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#374151">• Alpine.js + Tailwind</text>
+    <text x="780" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#374151">• Funcionalidades Completas</text>
+    
+    <!-- Classificador AWS -->
+    <rect x="920" y="220" width="200" height="80" rx="8" fill="#fed7aa" stroke="#ea580c" stroke-width="1"/>
+    <text x="1020" y="245" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#9a3412">Classificador</text>
+    <text x="1020" y="265" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#374151">• Regras Baseadas</text>
+    <text x="1020" y="280" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#374151">• Sem Dependências</text>
+    <text x="1020" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="#374151">• Respostas Template</text>
+    
+    <!-- URL AWS -->
+    <rect x="750" y="330" width="300" height="30" rx="15" fill="#10b981" stroke="#059669" stroke-width="1"/>
+    <text x="900" y="350" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" font-weight="bold" fill="white">x1r6i3udxg.execute-api.us-east-1.amazonaws.com</text>
+  </g>
+  
+  <!-- Fluxo de Dados -->
+  <g id="data-flow">
+    <!-- Setas de conexão -->
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+        <polygon points="0 0, 10 3.5, 0 7" fill="#374151" />
+      </marker>
+    </defs>
+    
+    <!-- Local: Frontend -> Backend -->
+    <line x1="280" y1="170" x2="320" y2="170" stroke="#374151" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <text x="300" y="165" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#374151">API</text>
+    
+    <!-- AWS: API Gateway -> Lambda -->
+    <line x1="880" y1="160" x2="920" y2="160" stroke="#374151" stroke-width="2" marker-end="url(#arrowhead)"/>
+    <text x="900" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#374151">Invoke</text>
+    
+    <!-- Deploy: Local -> AWS -->
+    <path d="M 550 240 Q 600 200 650 240" stroke="#10b981" stroke-width="3" fill="none" marker-end="url(#arrowhead)" stroke-dasharray="5,5"/>
+    <text x="600" y="210" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#059669">Serverless Deploy</text>
+  </g>
+  
+  <!-- Tecnologias Utilizadas -->
+  <g id="tech-stack">
+    <rect x="50" y="450" width="1100" height="300" rx="15" fill="url(#dataGrad)" opacity="0.1" stroke="#10b981" stroke-width="2"/>
+    <text x="600" y="475" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#1f2937">🛠️ Stack Tecnológico</text>
+    
+    <!-- Frontend Tech -->
+    <rect x="80" y="500" width="250" height="120" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1"/>
+    <text x="205" y="525" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#065f46">Frontend</text>
+    <text x="100" y="545" font-family="Arial, sans-serif" font-size="12" fill="#374151">• HTML5 + CSS3</text>
+    <text x="100" y="560" font-family="Arial, sans-serif" font-size="12" fill="#374151">• Alpine.js (Reatividade)</text>
+    <text x="100" y="575" font-family="Arial, sans-serif" font-size="12" fill="#374151">• Tailwind CSS (Styling)</text>
+    <text x="100" y="590" font-family="Arial, sans-serif" font-size="12" fill="#374151">• PWA (Service Worker)</text>
+    <text x="100" y="605" font-family="Arial, sans-serif" font-size="12" fill="#374151">• LocalStorage (Histórico)</text>
+    
+    <!-- Backend Tech -->
+    <rect x="360" y="500" width="250" height="120" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1"/>
+    <text x="485" y="525" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#065f46">Backend Local</text>
+    <text x="380" y="545" font-family="Arial, sans-serif" font-size="12" fill="#374151">• Python 3.9+</text>
+    <text x="380" y="560" font-family="Arial, sans-serif" font-size="12" fill="#374151">• FastAPI (API REST)</text>
+    <text x="380" y="575" font-family="Arial, sans-serif" font-size="12" fill="#374151">• OpenAI GPT (Opcional)</text>
+    <text x="380" y="590" font-family="Arial, sans-serif" font-size="12" fill="#374151">• PyPDF2 (Processamento)</text>
+    <text x="380" y="605" font-family="Arial, sans-serif" font-size="12" fill="#374151">• Uvicorn (ASGI Server)</text>
+    
+    <!-- AWS Tech -->
+    <rect x="640" y="500" width="250" height="120" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1"/>
+    <text x="765" y="525" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#065f46">AWS Cloud</text>
+    <text x="660" y="545" font-family="Arial, sans-serif" font-size="12" fill="#374151">• Lambda (Serverless)</text>
+    <text x="660" y="560" font-family="Arial, sans-serif" font-size="12" fill="#374151">• API Gateway (HTTP)</text>
+    <text x="660" y="575" font-family="Arial, sans-serif" font-size="12" fill="#374151">• Python Runtime</text>
+    <text x="660" y="590" font-family="Arial, sans-serif" font-size="12" fill="#374151">• Serverless Framework</text>
+    <text x="660" y="605" font-family="Arial, sans-serif" font-size="12" fill="#374151">• Zero Dependencies</text>
+    
+    <!-- DevOps Tech -->
+    <rect x="920" y="500" width="250" height="120" rx="8" fill="#ecfdf5" stroke="#10b981" stroke-width="1"/>
+    <text x="1045" y="525" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#065f46">DevOps</text>
+    <text x="940" y="545" font-family="Arial, sans-serif" font-size="12" fill="#374151">• Git (Controle Versão)</text>
+    <text x="940" y="560" font-family="Arial, sans-serif" font-size="12" fill="#374151">• Docker (Containerização)</text>
+    <text x="940" y="575" font-family="Arial, sans-serif" font-size="12" fill="#374151">• Render (Deploy Local)</text>
+    <text x="940" y="590" font-family="Arial, sans-serif" font-size="12" fill="#374151">• AWS CLI (Deploy Cloud)</text>
+    <text x="940" y="605" font-family="Arial, sans-serif" font-size="12" fill="#374151">• Pytest (Testes)</text>
+  </g>
+  
+  <!-- Funcionalidades -->
+  <g id="features">
+    <rect x="80" y="650" width="1040" height="80" rx="8" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="600" y="675" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#1f2937">🎯 Funcionalidades Principais</text>
+    
+    <text x="120" y="695" font-family="Arial, sans-serif" font-size="11" fill="#374151">✅ Classificação Produtivo/Improdutivo</text>
+    <text x="120" y="710" font-family="Arial, sans-serif" font-size="11" fill="#374151">✅ Detecção de Intenção (Reunião, Aprovação, etc.)</text>
+    
+    <text x="400" y="695" font-family="Arial, sans-serif" font-size="11" fill="#374151">✅ Resposta Automática Contextual</text>
+    <text x="400" y="710" font-family="Arial, sans-serif" font-size="11" fill="#374151">✅ Upload de Arquivos (.txt, .pdf)</text>
+    
+    <text x="680" y="695" font-family="Arial, sans-serif" font-size="11" fill="#374151">✅ Interface Moderna e Responsiva</text>
+    <text x="680" y="710" font-family="Arial, sans-serif" font-size="11" fill="#374151">✅ Histórico Persistente + Auto-refresh</text>
+    
+    <text x="960" y="695" font-family="Arial, sans-serif" font-size="11" fill="#374151">✅ Deploy Multi-ambiente</text>
+    <text x="960" y="710" font-family="Arial, sans-serif" font-size="11" fill="#374151">✅ Modo Escuro + PWA</text>
+  </g>
+  
+  <!-- Rodapé -->
+  <text x="600" y="780" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#6b7280">AutoU Email Classifier - Sistema Inteligente de Classificação e Resposta de E-mails</text>
+</svg>
