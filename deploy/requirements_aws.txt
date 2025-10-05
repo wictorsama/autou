@@ -1,7 +1,2 @@
-fastapi==0.104.1
-starlette==0.27.0
-pydantic==2.5.0
-typing-extensions==4.8.0
-anyio==3.7.1
-sniffio==1.3.0
-idna==3.4
+# Minimal dependencies for AWS Lambda direct integration
+# No external dependencies needed - using only Python standard library

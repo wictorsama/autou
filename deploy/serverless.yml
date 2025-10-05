@@ -9,9 +9,11 @@ provider:
   memorySize: 512
   timeout: 30
   environment:
-    OPENAI_API_KEY: ${env:OPENAI_API_KEY}
+    OPENAI_API_KEY: ${env:OPENAI_API_KEY, ''}
     OPENAI_MODEL: gpt-4o-mini
     LOG_LEVEL: INFO
+    ZSL_MODEL: joeddav/xlm-roberta-large-xnli
+    MAX_TEXT_CHARS: '20000'
 
 functions:
   app:
@@ -42,13 +44,13 @@ functions:
               - X-Amz-Security-Token
               - X-Amz-User-Agent
 
-# plugins:
-#   - serverless-python-requirements
+plugins:
+  - serverless-wsgi
 
-# custom:
-#   wsgi:
-#     app: handler.app
-#     packRequirements: false
+custom:
+  wsgi:
+    app: handler.app
+    packRequirements: false
 
 package:
   patterns:
